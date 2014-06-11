@@ -85,6 +85,11 @@ namespace RestSharp
 		HttpResponse AsGet(string httpMethod);
 
 		IWebProxy Proxy { get; set; }
+
+		/// <summary>
+		/// Set to false if you don't want to encode parameters that are in the body of a POST or PUT. Default is true.
+		/// </summary>
+		bool UrlEncodeParameters { get; set; }
 #endif
 	}
 }

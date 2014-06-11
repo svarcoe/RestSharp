@@ -308,6 +308,7 @@ namespace RestSharp
 
 		private void ConfigureHttp(IRestRequest request, IHttp http)
 		{
+			http.UrlEncodeParameters = request.UrlEncodeParameters;
 			http.AlwaysMultipartFormData = request.AlwaysMultipartFormData;
 #if !PocketPC
 			http.UseDefaultCredentials = request.UseDefaultCredentials;

@@ -187,6 +187,11 @@ namespace RestSharp
 		/// </summary>
 		public IWebProxy Proxy { get; set; }
 #endif
+		
+		/// <summary>
+		/// Set to false if you don't want to encode parameters that are in the body of a POST or PUT. Default is true.
+		/// </summary>
+		public bool UrlEncodeParameters { get; set; }
 
 		/// <summary>
 		/// Default constructor
@@ -197,6 +202,7 @@ namespace RestSharp
 			Files = new List<HttpFile>();
 			Parameters = new List<HttpParameter>();
 			Cookies = new List<HttpCookie>();
+			UrlEncodeParameters = true;
 
 			_restrictedHeaderActions = new Dictionary<string, Action<HttpWebRequest, string>>(StringComparer.OrdinalIgnoreCase);
 
@@ -311,7 +317,9 @@ namespace RestSharp
 			{
 				if (querystring.Length > 1)
 					querystring.Append("&");
-				querystring.AppendFormat("{0}={1}", p.Name.UrlEncode(), p.Value.UrlEncode());
+				string parameterName = UrlEncodeParameters ? p.Name.UrlEncode() : p.Name;
+				string parameterValue = UrlEncodeParameters ? p.Value.UrlEncode() : p.Value;
+				querystring.AppendFormat("{0}={1}", parameterName, parameterValue);
 			}
 
 			return querystring.ToString();

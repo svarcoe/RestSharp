@@ -246,6 +246,10 @@ namespace RestSharp
 		IRestRequest AddUrlSegment(string name, string value);
 
 		Action<IRestResponse> OnBeforeDeserialization { get; set; }
+		/// <summary>
+		/// Set to false if you want to skip url encoding parameters that are added to the body of POST and PUT messages
+		/// </summary>
+		bool UrlEncodeParameters { get; set; }
 		void IncreaseNumAttempts();
 	}
 }

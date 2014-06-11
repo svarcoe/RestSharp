@@ -66,7 +66,7 @@ namespace RestSharp
 			Files = new List<FileParameter>();
 			XmlSerializer = new XmlSerializer();
 			JsonSerializer = new JsonSerializer();
-
+			UrlEncodeParameters = true;
 			OnBeforeDeserialization = r => { };
 		}
 
@@ -444,6 +444,11 @@ namespace RestSharp
 		/// A function to run prior to deserializing starting (e.g. change settings if error encountered)
 		/// </summary>
 		public Action<IRestResponse> OnBeforeDeserialization { get; set; }
+
+		/// <summary>
+		/// Set to false if you want to skip url encoding parameters that are added to the body of POST and PUT messages
+		/// </summary>
+		public bool UrlEncodeParameters { get; set; }
 
 		/// <summary>
 		/// Used by the default deserializers to explicitly set which date format string to use when parsing dates.
